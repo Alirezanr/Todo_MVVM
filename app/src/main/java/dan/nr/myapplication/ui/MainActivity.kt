@@ -1,8 +1,11 @@
-package dan.nr.myapplication
+package dan.nr.myapplication.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import dan.nr.myapplication.R
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?)
