@@ -1,5 +1,7 @@
 package dan.nr.myapplication.repository
 
-class AuthRepository
+import dan.nr.myapplication.base.BaseRepository
+
+class AuthRepository : BaseRepository()
 {
 }
