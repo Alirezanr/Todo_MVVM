@@ -8,14 +8,16 @@ import retrofit2.http.POST
 interface AuthenticationApi
 {
     @POST("auth/signup")
-    fun signup(@Field("name") name: String,
-               @Field("email") email: String,
-               @Field("password") password: String,
-               @Field("password_confirmation") password_confirmation: String): Response<AuthModel>
+    suspend fun signup(@Field("name") name: String,
+                       @Field("email") email: String,
+                       @Field("password") password: String,
+                       @Field("password_confirmation") password_confirmation: String): Response<AuthModel>
 
 
     @POST("auth/login")
-    fun login(@Field("email") email: String,
-              @Field("password") password: String): Response<AuthModel>
+    suspend fun login(@Field("email") email: String,
+                      @Field("password") password: String): Response<AuthModel>
 
+    @POST("logout")
+    suspend fun logout(): Response<AuthModel>
 }
