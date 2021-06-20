@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dan.nr.myapplication.R
 import dan.nr.myapplication.util.UserPreferences
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
+@AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash)
 {
     @Inject
@@ -31,7 +33,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash)
                         //todo : navigate to home screen
                     } else
                     {
-                        //todo : navigate to login screen
+                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                     }
                 }
             }

@@ -15,5 +15,5 @@ object AppModule
 {
     @Singleton
     @Provides
-    fun provideUserPreferences(@ApplicationContext context: Context) = UserPreferences(context)
+    fun provideUserPreferences(@ApplicationContext context: Context) :UserPreferences = UserPreferences(context)
 }
