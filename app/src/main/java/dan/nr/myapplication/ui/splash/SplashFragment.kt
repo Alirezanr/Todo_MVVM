@@ -25,7 +25,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash)
     {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
                 userPreferences.authToken.collect {
                     delay(400)
                     if (it != null)
