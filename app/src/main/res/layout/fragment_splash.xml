@@ -14,5 +14,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_checkbox_done" />
+        app:srcCompat="@drawable/ic_main_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
