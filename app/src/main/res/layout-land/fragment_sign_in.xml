@@ -67,7 +67,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_14dp"
                 android:layout_marginEnd="@dimen/dimen_14dp"
                 android:orientation="vertical">
@@ -77,11 +77,29 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
                     android:gravity="center|top"
-                    android:text="@string/login"
+                    android:text="@string/sign_in"
                     android:textSize="@dimen/dimen_24sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_email_fragment_login"
+                    android:id="@+id/edt_name_fragment_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_14dp"
+                    android:paddingStart="@dimen/dimen_14dp"
+                    android:paddingEnd="@dimen/dimen_14dp"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:hint="@string/name"
+                        android:inputType="textPersonName" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edt_email_fragment_signin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -99,11 +117,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_password_fragment_login"
+                    android:id="@+id/edt_password_fragment_signin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
-                    android:layout_marginBottom="@dimen/dimen_50dp"
                     android:paddingStart="@dimen/dimen_14dp"
                     android:paddingEnd="@dimen/dimen_14dp"
                     app:endIconMode="password_toggle">
@@ -117,12 +134,32 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edt_confirm_password_fragment_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_14dp"
+                    android:paddingStart="@dimen/dimen_14dp"
+                    android:paddingEnd="@dimen/dimen_14dp"
+                    android:layout_marginBottom="@dimen/dimen_50dp"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:hint="@string/confirm_password"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_login_fragment_login"
+        android:id="@+id/btn_signin_fragment_signin"
         style="@style/CustomButtons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -136,16 +173,16 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/txt_sign_in_fragment_login"
-        android:text="@string/sign_in"
+        android:id="@+id/txt_log_in_fragment_signin"
+        android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_14dp"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login_fragment_login"
-        app:layout_constraintStart_toStartOf="@+id/btn_login_fragment_login"
-        app:layout_constraintTop_toTopOf="@+id/guideline_vertical_7_fr_signin" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_signin_fragment_signin"
+        app:layout_constraintStart_toStartOf="@+id/btn_signin_fragment_signin"
+        app:layout_constraintTop_toTopOf="@+id/guideline_vertical_7_fr_signin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
