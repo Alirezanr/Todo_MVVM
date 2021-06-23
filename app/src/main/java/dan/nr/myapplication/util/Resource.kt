@@ -1,29 +1,38 @@
 package dan.nr.myapplication.util
 
-data class Resource<out T>(val status: Status, val data: T?, val message: String?)
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+
+suspend fun <T> safeApiCall(apiCall: suspend () -> T): Resource<T>
 {
-    companion object
-    {
-        fun <T> success(data: T?): Resource<T>
+    return withContext(Dispatchers.IO) {
+        try
         {
-            return Resource(Status.SUCCESS, data, null)
-        }
-
-        fun <T> error(isNetworkError:Boolean,msg: String?, data: T?): Resource<T>
+            Resource.Success(apiCall.invoke())
+        } catch (t: Exception)
         {
-            return Resource(Status.ERROR, data, msg)
-        }
-
-        fun <T> loading(data: T?): Resource<T>
-        {
-            return Resource(Status.LOADING, data, null)
+            when (t)
+            {
+                is HttpException ->
+                {
+                    Resource.Error(false, t.code(), t.response().toString())
+                }
+                else             ->
+                {
+                    Resource.Error(true, null, t.message ?: "NULL")
+                }
+            }
         }
     }
 }
 
-enum class Status
+sealed class Resource<out R>
 {
-    SUCCESS,
-    ERROR,
-    LOADING
+    data class Success<out T>(val data: T) : Resource<T>()
+    data class Error(val isNetworkError: Boolean,
+                     val errorCode: Int?,
+                     val errorBody: String?) : Resource<Nothing>()
+
+    object Loading : Resource<Nothing>()
 }
