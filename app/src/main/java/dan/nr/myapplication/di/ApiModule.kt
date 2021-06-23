@@ -1,13 +1,11 @@
 package dan.nr.myapplication.di
 
 import androidx.viewbinding.BuildConfig
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dan.nr.myapplication.network.AuthenticationApi
+import dan.nr.myapplication.network.AuthApi
 import dan.nr.myapplication.util.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,18 +19,12 @@ object ApiModule
 {
     @Singleton
     @Provides
-    fun provideGsonBuilder(): Gson = GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(gson: Gson): Retrofit.Builder
+    fun provideRetrofit(): Retrofit.Builder
     {
         return Retrofit
                 .Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(OkHttpClient.Builder()
                                 .addInterceptor { chain ->
                                     chain.proceed(chain.request().newBuilder().also {
@@ -51,10 +43,10 @@ object ApiModule
 
     @Singleton
     @Provides
-    fun provideAuthService(retrofit: Retrofit.Builder): AuthenticationApi
+    fun provideAuthService(retrofit: Retrofit.Builder): AuthApi
     {
         return retrofit
                 .build()
-                .create(AuthenticationApi::class.java)
+                .create(AuthApi::class.java)
     }
 }
