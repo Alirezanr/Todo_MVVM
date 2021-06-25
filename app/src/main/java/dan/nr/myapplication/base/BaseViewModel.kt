@@ -1,13 +1,13 @@
 package dan.nr.myapplication.base
 
 import androidx.lifecycle.ViewModel
-import dan.nr.myapplication.network.AuthenticationApi
+import dan.nr.myapplication.network.AuthApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-abstract class BaseViewModel(private val repository: BaseRepository) : ViewModel()
+open  class BaseViewModel(private val repository: BaseRepository) : ViewModel()
 {
-    suspend fun logout(api: AuthenticationApi) = withContext(Dispatchers.IO) {
+    suspend fun logout(api: AuthApi) = withContext(Dispatchers.IO) {
         repository.logout(api)
     }
 }

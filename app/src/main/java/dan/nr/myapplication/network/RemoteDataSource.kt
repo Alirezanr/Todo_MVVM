@@ -7,11 +7,8 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 
-class RemoteDataSource @Inject constructor()
+class RemoteDataSource @Inject constructor(var retrofit: Retrofit.Builder)
 {
-    @Inject
-    lateinit var retrofit: Retrofit.Builder
-
     fun <Api> buildApi(api: Class<Api>, authToken: String? = null): Api
     {
         return retrofit
