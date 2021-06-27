@@ -27,14 +27,15 @@ class SplashFragment : Fragment(R.layout.fragment_splash)
         lifecycleScope.launchWhenStarted {
             withContext(Dispatchers.Main) {
                 userPreferences.authToken.collect {
-                    delay(400)
+                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                   /* delay(400)
                     if (it != null)
                     {
                         //todo : navigate to home screen
                     } else
                     {
                         findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                    }
+                    }*/
                 }
             }
         }

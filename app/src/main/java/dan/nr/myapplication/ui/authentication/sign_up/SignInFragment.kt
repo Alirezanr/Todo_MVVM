@@ -4,30 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import dan.nr.myapplication.R
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import dan.nr.myapplication.base.BaseFragment
 import dan.nr.myapplication.databinding.FragmentSignInBinding
-import dan.nr.myapplication.repository.AuthRepository
-import dan.nr.myapplication.ui.authentication.AuthViewModel
+import dan.nr.myapplication.viewmodel.AuthViewModel
 
-class SignInFragment : BaseFragment<AuthViewModel, FragmentSignInBinding, AuthRepository>()
+@AndroidEntryPoint
+class SignInFragment : BaseFragment<FragmentSignInBinding>()
 {
+    private val viewModel:AuthViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        binding.txtLogInFragmentLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_loginFragment)
+        binding.btnSigninFragmentSignin.setOnClickListener {
+            Toast.makeText(requireContext(), "toast", Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun getViewModel(): Class<AuthViewModel> = AuthViewModel::class.java
-
     override fun getFragmentBinding(inflater: LayoutInflater,
                                     container: ViewGroup?): FragmentSignInBinding =
             FragmentSignInBinding.inflate(inflater,
                                           container,
                                           false)
 
-    override fun getFragmentRepository(): AuthRepository = AuthRepository()
 }

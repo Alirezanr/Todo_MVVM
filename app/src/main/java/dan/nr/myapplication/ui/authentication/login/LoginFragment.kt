@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
@@ -27,6 +25,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
 
     private val email get() = binding.edtEmailFragmentLogin.editText?.text.toString().trim()
     private val password get() = binding.edtPasswordFragmentLogin.editText?.text.toString().trim()
+    private val txtSignup get() = binding.txtSignInFragmentLogin
 
     //Because startAnimation() does not work with viewBindings we should use old findViewById way
     lateinit var btnLogin: CircularProgressButton
@@ -34,17 +33,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        btnLogin = requireActivity().findViewById(R.id.btn_login_fragment_login)
+        btnLogin = requireView().findViewById(R.id.btn_login_fragment_login)
+
         binding.txtSignInFragmentLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signInFragment)
         }
+
         subscribeObservers()
         btnLogin.setOnClickListener {
             if (inputsAreValid())
             {
-                it.isClickable = false
-                binding.txtSignInFragmentLogin.isClickable = false
-                btnLogin.startAnimation()
                 login()
             }
         }
@@ -52,42 +50,82 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
 
     private fun subscribeObservers()
     {
-        viewModel.loginResponse.observe(viewLifecycleOwner, Observer { response ->
-            when (response)
-            {
-                is Resource.Success<AuthResponse> ->
+        lifecycleScope.launchWhenStarted {
+            viewModel.loginEventFlow.collect { response ->
+                when (response)
                 {
-                    btnLogin.revertAnimation()
-
-                    binding.root.snackBar("Successfully logged in")
-                    Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
-                    lifecycleScope.launchWhenStarted {
+                    is Resource.Success<AuthResponse> ->
+                    {
+                        Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
+                        setClickable(false)
+                        btnLogin.stopAnimation()
+                        requireView().snackBar("Successfully logged in")
                         val authToken: String? = response.data.user?.accessToken
                         if (authToken != null)
                         {
-                            userPreferences.clear()
-                            userPreferences.saveAuthToken(authToken)
-                            logout()
+                            viewModel.saveAuthToken(authToken,
+                                                    userPreferences)
                             //todo navigate to home
-                            userPreferences.authToken.collect {
-                                Log.i(TAG, "subscribeObservers: auth=$it")
-                            }
                         }
                     }
-                }
-                is Resource.Error ->
-                {
-                    btnLogin.revertAnimation()
-                    Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
-                    Log.i(TAG, "subscribeObservers:Resource.Error-> response=${response}")
-                    this.handleApiError(response)
-                }
-                is Resource.Loading ->
-                {
-
+                    is Resource.Error ->
+                    {
+                        Log.i(TAG, "subscribeObservers:Resource.Error-> response=${response}")
+                        btnLogin.revertAnimation()
+                        setClickable(true)
+                        this@LoginFragment.handleApiError(response) {
+                            login()
+                        }
+                    }
+                    is Resource.Loading ->
+                    {
+                        Log.i(TAG, "subscribeObservers:Resource.Loading")
+                        setClickable(false)
+                        btnLogin.startAnimation()
+                    }
                 }
             }
-        })
+        }
+        /* viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
+             when (response)
+             {
+                 is Resource.Success<AuthResponse> ->
+                 {
+                     Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
+                     setClickable(false)
+                     btnLogin.stopAnimation()
+                     requireView().snackBar("Successfully logged in")
+                     val authToken: String? = response.data.user?.accessToken
+                     if (authToken != null)
+                     {
+                         viewModel.saveAuthToken(authToken,
+                                                 userPreferences)
+                         //todo navigate to home
+                     }
+                 }
+                 is Resource.Error ->
+                 {
+                     Log.i(TAG, "subscribeObservers:Resource.Error-> response=${response}")
+                     btnLogin.revertAnimation()
+                     setClickable(true)
+                     this.handleApiError(response) {
+                         login()
+                     }
+                 }
+                 is Resource.Loading ->
+                 {
+                     Log.i(TAG, "subscribeObservers:Resource.Loading")
+                     setClickable(false)
+                     btnLogin.startAnimation()
+                 }
+             }
+         }*/
+    }
+
+    private fun setClickable(canUserClick: Boolean)
+    {
+        btnLogin.isClickable = canUserClick
+        txtSignup.isClickable = canUserClick
     }
 
     private fun inputsAreValid(): Boolean

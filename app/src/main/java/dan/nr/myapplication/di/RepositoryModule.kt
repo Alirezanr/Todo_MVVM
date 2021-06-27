@@ -15,7 +15,7 @@ object RepositoryModule
 {
     @Singleton
     @Provides
-    fun provideBaseRepository( ): BaseRepository = BaseRepository()
+    fun provideBaseRepository(): BaseRepository = BaseRepository()
 
     @Singleton
     @Provides

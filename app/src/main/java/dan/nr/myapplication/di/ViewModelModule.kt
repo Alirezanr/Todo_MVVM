@@ -6,7 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dan.nr.myapplication.base.BaseRepository
 import dan.nr.myapplication.base.BaseViewModel
+import dan.nr.myapplication.network.RemoteDataSource
 import dan.nr.myapplication.repository.AuthRepository
+import dan.nr.myapplication.util.UserPreferences
 import dan.nr.myapplication.viewmodel.AuthViewModel
 import javax.inject.Singleton
 
@@ -16,7 +18,8 @@ object ViewModelModule
 {
     @Singleton
     @Provides
-    fun provideBaseViewModel(repository: BaseRepository): BaseViewModel = BaseViewModel(repository)
+    fun provideBaseViewModel(repository: BaseRepository): BaseViewModel =
+            BaseViewModel(repository)
 
     @Singleton
     @Provides

@@ -121,13 +121,13 @@
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/btn_login_fragment_login"
         style="@style/CustomButtons"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_32dp"
         android:layout_marginEnd="@dimen/dimen_32dp"
+        android:layout_height="wrap_content"
         android:elevation="@dimen/dimen_14dp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="@id/cardView"

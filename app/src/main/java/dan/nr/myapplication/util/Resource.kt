@@ -18,7 +18,7 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): Resource<T>
                 {
                     Resource.Error(false, t.code(), t.response().toString())
                 }
-                else             ->
+                else ->
                 {
                     Resource.Error(true, null, t.message ?: "NULL")
                 }
