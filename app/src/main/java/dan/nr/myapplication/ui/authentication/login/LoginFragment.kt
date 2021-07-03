@@ -1,7 +1,9 @@
 package dan.nr.myapplication.ui.authentication.login
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +38,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
         btnLogin = requireView().findViewById(R.id.btn_login_fragment_login)
 
         binding.txtSignInFragmentLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signInFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
         subscribeObservers()
@@ -79,47 +81,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
                     }
                     is Resource.Loading ->
                     {
-                        Log.i(TAG, "subscribeObservers:Resource.Loading")
                         setClickable(false)
                         btnLogin.startAnimation()
                     }
                 }
             }
         }
-        /* viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
-             when (response)
-             {
-                 is Resource.Success<AuthResponse> ->
-                 {
-                     Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
-                     setClickable(false)
-                     btnLogin.stopAnimation()
-                     requireView().snackBar("Successfully logged in")
-                     val authToken: String? = response.data.user?.accessToken
-                     if (authToken != null)
-                     {
-                         viewModel.saveAuthToken(authToken,
-                                                 userPreferences)
-                         //todo navigate to home
-                     }
-                 }
-                 is Resource.Error ->
-                 {
-                     Log.i(TAG, "subscribeObservers:Resource.Error-> response=${response}")
-                     btnLogin.revertAnimation()
-                     setClickable(true)
-                     this.handleApiError(response) {
-                         login()
-                     }
-                 }
-                 is Resource.Loading ->
-                 {
-                     Log.i(TAG, "subscribeObservers:Resource.Loading")
-                     setClickable(false)
-                     btnLogin.startAnimation()
-                 }
-             }
-         }*/
     }
 
     private fun setClickable(canUserClick: Boolean)

@@ -16,8 +16,8 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_splashFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
+            android:id="@+id/action_splashFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -27,20 +27,18 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/signInFragment"
-        tools:layout="@layout/fragment_sign_in"
-        android:name="dan.nr.myapplication.ui.authentication.sign_up.SignInFragment"
-        android:label="SignInFragment" >
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:name="dan.nr.myapplication.ui.authentication.sign_up.SignupFragment"
+        android:label="SignUpFragment" >
         <action
-            android:id="@+id/action_signInFragment_to_loginFragment"
+            android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,42 +9,42 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/shape_auth_top"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_50_fr_signin"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_50_fr_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_50_fr_signin"
+        android:id="@+id/guideline_horizontal_50_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_40_fr_signin"
+        android:id="@+id/guideline_horizontal_40_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_85_fr_signin"
+        android:id="@+id/guideline_horizontal_85_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_7_fr_signin"
+        android:id="@+id/guideline_vertical_7_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.07" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_93_fr_signin"
+        android:id="@+id/guideline_vertical_93_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -56,7 +55,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:padding="@dimen/dimen_14dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_40_fr_signin"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_40_fr_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
@@ -69,11 +68,11 @@
         android:layout_height="0dp"
         android:background="@color/white"
         app:cardCornerRadius="@dimen/dimen_14dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_85_fr_signin"
-        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_93_fr_signin"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_85_fr_signup"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_93_fr_signup"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_7_fr_signin"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_40_fr_signin"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_7_fr_signup"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_horizontal_40_fr_signup"
         app:layout_constraintVertical_bias="0.0">
 
         <ScrollView
@@ -92,11 +91,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
                     android:gravity="center|top"
-                    android:text="@string/sign_in"
+                    android:text="@string/sign_up"
                     android:textSize="@dimen/dimen_24sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_name_fragment_signin"
+                    android:id="@+id/edt_name_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -114,7 +113,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_email_fragment_signin"
+                    android:id="@+id/edt_email_fragment_signiup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -132,7 +131,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_password_fragment_signin"
+                    android:id="@+id/edt_password_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -150,7 +149,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_confirm_password_fragment_signin"
+                    android:id="@+id/edt_confirm_password_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -173,27 +172,30 @@
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_signin_fragment_signin"
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/btn_signup_fragment_signup"
         style="@style/CustomButtons"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:elevation="@dimen/dimen_14dp"
-        android:text="@string/sign_in"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="@id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:spinning_bar_color="@color/white"
+        app:spinning_bar_padding="@dimen/dimen_5dp"
+        app:spinning_bar_width="@dimen/dimen_5dp" />
 
     <TextView
-        android:id="@+id/txt_log_in_fragment_signin"
+        android:id="@+id/txt_log_in_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_signin_fragment_signin"
-        app:layout_constraintStart_toStartOf="@+id/btn_signin_fragment_signin"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_85_fr_signin" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup_fragment_signup"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup_fragment_signup"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_85_fr_signup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

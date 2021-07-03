@@ -32,7 +32,7 @@
         app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_7_fr_signin"
+        android:id="@+id/guideline_vertical_7_fr_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -55,7 +55,7 @@
         android:paddingTop="@dimen/dimen_32dp"
         android:paddingBottom="@dimen/dimen_32dp"
         app:cardCornerRadius="@dimen/dimen_14dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline_vertical_7_fr_signin"
+        app:layout_constraintBottom_toTopOf="@id/guideline_vertical_7_fr_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="@id/guideline4"
@@ -77,11 +77,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
                     android:gravity="center|top"
-                    android:text="@string/sign_in"
+                    android:text="@string/sign_up"
                     android:textSize="@dimen/dimen_24sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_name_fragment_signin"
+                    android:id="@+id/edt_name_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -99,7 +99,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_email_fragment_signin"
+                    android:id="@+id/edt_email_fragment_signiup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -117,7 +117,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_password_fragment_signin"
+                    android:id="@+id/edt_password_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
@@ -135,13 +135,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_confirm_password_fragment_signin"
+                    android:id="@+id/edt_confirm_password_fragment_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_14dp"
+                    android:layout_marginBottom="@dimen/dimen_50dp"
                     android:paddingStart="@dimen/dimen_14dp"
                     android:paddingEnd="@dimen/dimen_14dp"
-                    android:layout_marginBottom="@dimen/dimen_50dp"
                     app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -158,31 +158,34 @@
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btn_signin_fragment_signin"
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/btn_signup_fragment_signup"
         style="@style/CustomButtons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_32dp"
         android:layout_marginEnd="@dimen/dimen_32dp"
         android:elevation="@dimen/dimen_14dp"
-        android:text="@string/login"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="@id/cardView"
         app:layout_constraintEnd_toEndOf="@id/cardView"
         app:layout_constraintStart_toStartOf="@id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:spinning_bar_color="@color/white"
+        app:spinning_bar_padding="@dimen/dimen_5dp"
+        app:spinning_bar_width="@dimen/dimen_5dp" />
 
     <TextView
         android:id="@+id/txt_log_in_fragment_signin"
-        android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_14dp"
+        android:text="@string/login"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_signin_fragment_signin"
-        app:layout_constraintStart_toStartOf="@+id/btn_signin_fragment_signin"
-        app:layout_constraintTop_toTopOf="@+id/guideline_vertical_7_fr_signin"/>
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup_fragment_signup"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup_fragment_signup"
+        app:layout_constraintTop_toTopOf="@+id/guideline_vertical_7_fr_signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

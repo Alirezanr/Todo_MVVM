@@ -26,7 +26,7 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_7_fr_signin"
+        android:id="@+id/guideline_vertical_7_fr_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_85_fr_login"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical_93_fr_login"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_7_fr_signin"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_7_fr_login"
         app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_40_fr_login"
         app:layout_constraintVertical_bias="0.0">
 
@@ -104,12 +104,12 @@
                     app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/someId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#FFFFFF"
                         android:hint="@string/email"
-                        android:inputType="textEmailAddress"
-                        android:text="a@b.c" />
+                        android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,8 +128,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#FFFFFF"
                         android:hint="@string/password"
-                        android:inputType="textPassword"
-                        android:text="123456789" />
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,7 +155,7 @@
         android:id="@+id/txt_sign_in_fragment_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
+        android:text="@string/sign_up"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="@dimen/dimen_14sp"
         app:layout_constraintBottom_toBottomOf="parent"
