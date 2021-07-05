@@ -17,9 +17,15 @@ fun View.isViewEnable(enabled: Boolean)
     alpha = if (enabled) 1f else 0.9f
 }
 
-fun View.snackBar(message: String, action: (() -> Unit)? = null)
+fun View.snackBar(message: String,
+                  action: (() -> Unit)? = null,
+                  backgroundColor: Int = LITE_GRAY,
+                  textColor: Int = DARk_GRAY)
 {
-    val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
+    val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG).apply {
+        setBackgroundTint(backgroundColor)
+        setTextColor(textColor)
+    }
     action?.let {
         snackbar.setAction("Retry") {
             it()
@@ -35,13 +41,16 @@ fun Fragment.handleApiError(failure: Resource.Error,
     {
         failure.isNetworkError ->
         {
-            requireView().snackBar("Please check your network connection.", retry)
+            requireView().snackBar("Please check your network connection.", retry, RED_ERROR, WHITE)
         }
         failure.errorCode == 401 ->
         {
             if (this is LoginFragment)
             {
-                requireView().snackBar("You have entered wrong email or password")
+                requireView().snackBar("You have entered wrong email or password",
+                                       null,
+                                       RED_ERROR,
+                                       WHITE)
             } else
             {
                 //(this as BaseFragment< *>).logout()
@@ -49,20 +58,11 @@ fun Fragment.handleApiError(failure: Resource.Error,
         }
         else ->
         {
-            requireView().snackBar(failure.errorBody.toString())
+            requireView().snackBar(failure.errorBody.toString(),
+                                   null,
+                                   RED_ERROR,
+                                   WHITE)
         }
     }
-
 }
-/*
-fun navigateFirstTabWithClearStack() {
-    val navController = findNavController(R.id.fragmentContainerView)
-    val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
-    val inflater = navHostFragment.navController.navInflater
-    val graph = inflater.inflate(R.navigation.nav_graph_main)
-    graph.startDestination = R.id.nav_graph_tab1
-
-    navController.graph = graph
-}
-*/
 

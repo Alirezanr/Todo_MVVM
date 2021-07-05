@@ -19,6 +19,10 @@ interface AuthApi
     suspend fun login(@Field("email") email: String,
                       @Field("password") password: String): AuthResponse
 
+    @FormUrlEncoded
+    @POST("auth/email-check")
+    suspend fun emailCheck(@Field("email") email: String): AuthResponse
+
     @POST("logout")
     suspend fun logout(): AuthResponse
 }

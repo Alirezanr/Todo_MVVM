@@ -16,4 +16,8 @@ class AuthRepository(var api: AuthApi) : BaseRepository()
                        confirmedPassword: String) = safeApiCall {
         api.signup(name, email, password, confirmedPassword)
     }
+
+    suspend fun emailCheck(email: String) = safeApiCall {
+        api.emailCheck(email)
+    }
 }

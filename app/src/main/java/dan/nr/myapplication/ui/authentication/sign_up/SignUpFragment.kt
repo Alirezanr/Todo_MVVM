@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import dan.nr.myapplication.databinding.FragmentSignUpBinding
 import dan.nr.myapplication.model.auth.AuthResponse
 import dan.nr.myapplication.util.*
 import dan.nr.myapplication.viewmodel.AuthViewModel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -30,11 +32,30 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
     private val txtLogin get() = binding.txtLogInFrSignup
     private lateinit var btnSignup: CircularProgressButton
 
+    private var job: Job? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-        btnSignup = requireView().findViewById(R.id.btn_signup_fragment_signup)
         subscribeObservers()
+        btnSignup = requireView().findViewById(R.id.btn_signup_fragment_signup)
+        binding.edtEmailFragmentSigniup.editText?.addTextChangedListener { editable ->
+            job?.cancel()
+            if (email.isValidEmail())
+            {
+                job = CoroutineScope(Dispatchers.Main).launch {
+                    delay(600)
+                    editable.let {
+                        if (email.isNotEmpty())
+                        {
+                            Log.i(TAG, "onViewCreated: $email")
+                            viewModel.emailCheck(email)
+                        }
+                    }
+                }
+            }
+        }
+
+
         btnSignup.setOnClickListener {
             if (inputsAreValid())
             {
@@ -64,7 +85,7 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
                         Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
                         btnSignup.stopAnimation()
                         setClickable(false)
-                        requireView().snackBar("Successfully signed up")
+                        requireView().snackBar("Successfully signed up", null, GREEN_SUCCESS, WHITE)
                         val authToken = response.data.user?.accessToken
                         if (authToken != null)
                         {
@@ -81,12 +102,40 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
                 }
             }
         }
+        viewModel.emailCheckResponse.observe(viewLifecycleOwner) { respons ->
+            when (respons)
+            {
+                is Resource.Loading ->
+                {
+                    binding.edtEmailFragmentSigniup.isErrorEnabled = false
 
+                    binding.edtEmailFragmentSigniup.isHelperTextEnabled = false
+                    binding.edtEmailFragmentSigniup.isErrorEnabled = false
+                }
+                is Resource.Success ->
+                {
+                    binding.edtEmailFragmentSigniup.isErrorEnabled = true
+                    binding.edtEmailFragmentSigniup.isHelperTextEnabled = true
+                    binding.edtEmailFragmentSigniup.helperText = "You can choose this email."
+
+                    Log.i(TAG, "subscribeObservers: Success:$respons")
+                }
+                is Resource.Error ->
+                {
+                    binding.edtEmailFragmentSigniup.isErrorEnabled = true
+                    if(respons.errorCode==409)
+                    {
+                        binding.edtEmailFragmentSigniup.error="This email is already taken"
+                    }
+                    Log.i(TAG, "subscribeObservers: Error:$respons")
+                }
+            }
+        }
     }
 
     private fun signUp()
     {
-        viewModel.signUp(name,email,password,confirmedPassword)
+        viewModel.signUp(name, email, password, confirmedPassword)
     }
 
     private fun setClickable(canUserClick: Boolean)
@@ -134,10 +183,4 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
             FragmentSignUpBinding.inflate(inflater,
                                           container,
                                           false)
-
-    override fun onDestroy()
-    {
-        super.onDestroy()
-        viewModel.clearAll()
-    }
 }

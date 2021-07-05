@@ -1,6 +1,8 @@
 package dan.nr.myapplication.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dan.nr.myapplication.base.BaseViewModel
@@ -23,6 +25,13 @@ class AuthViewModel @Inject constructor(var repository: AuthRepository) : BaseVi
     private val signUpEventChannel = Channel<Resource<AuthResponse>>()
     val signUpEventFlow = signUpEventChannel.receiveAsFlow()
 
+    private val _emailCheckResponse = MutableLiveData<Resource<AuthResponse>>()
+    val emailCheckResponse: LiveData<Resource<AuthResponse>> = _emailCheckResponse
+
+    init
+    {
+        Log.i(TAG, "init: ")
+    }
     fun login(email: String, password: String)
     {
         viewModelScope.launch {
@@ -34,9 +43,16 @@ class AuthViewModel @Inject constructor(var repository: AuthRepository) : BaseVi
     fun signUp(name: String, email: String, password: String, confirmedPassword: String)
     {
         viewModelScope.launch {
-            Log.i(TAG, "viewModel: signUp")
             signUpEventChannel.send(Resource.Loading)
             signUpEventChannel.send(repository.signUp(name, email, password, confirmedPassword))
+        }
+    }
+
+    fun emailCheck(email: String)
+    {
+        viewModelScope.launch {
+            _emailCheckResponse.postValue(Resource.Loading)
+            _emailCheckResponse.postValue(repository.emailCheck(email))
         }
     }
 
@@ -45,11 +61,8 @@ class AuthViewModel @Inject constructor(var repository: AuthRepository) : BaseVi
         userPreferences.clear()
         userPreferences.saveAuthToken(authToken)
     }
-    fun clearAll()
-    {
-        onCleared()
-    }
-    override fun onCleared()
+
+    public override fun onCleared()
     {
         super.onCleared()
         Log.i(TAG, "onCleared: ")

@@ -1,9 +1,7 @@
 package dan.nr.myapplication.ui.authentication.login
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +59,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
                         Log.i(TAG, "subscribeObservers:Resource.Success-> response=${response.data}")
                         setClickable(false)
                         btnLogin.stopAnimation()
-                        requireView().snackBar("Successfully logged in")
+                        requireView().snackBar("Successfully logged in", null, GREEN_SUCCESS, WHITE)
                         val authToken: String? = response.data.user?.accessToken
                         if (authToken != null)
                         {
