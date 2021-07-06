@@ -91,6 +91,7 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
                         {
                             userPreferences.clear()
                             userPreferences.saveAuthToken(authToken)
+                            findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
                         }
                     }
                     is Resource.Error ->

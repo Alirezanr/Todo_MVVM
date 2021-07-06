@@ -65,7 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>()
                         {
                             viewModel.saveAuthToken(authToken,
                                                     userPreferences)
-                            //todo navigate to home
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         }
                     }
                     is Resource.Error ->

@@ -31,10 +31,9 @@ class SplashFragment : Fragment(R.layout.fragment_splash)
             withContext(Dispatchers.Main) {
                 userPreferences.authToken.collect {
                     delay(400)
-                    if (it == null)
+                    if (it != null)
                     {
-                        //todo : navigate to home screen
-                        Log.i(TAG, "onViewCreated: its null")
+                        findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                     } else
                     {
                         findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
