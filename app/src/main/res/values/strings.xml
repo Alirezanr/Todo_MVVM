@@ -7,4 +7,11 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="loading">Loading</string>
+    <string name="date">Sep 5, 2021</string>
+    <string name="progress_text">% done</string>
+    <string name="done">Done</string>
+    <string name="total">Total</string>
+    <string name="todos">Todos:</string>
+    <string name="your_todos">Your\n<br/>Todos</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto blanditiis cupiditate doloremque, dolores earum eius et itaque mollitia nam nulla pariatur perferendis, placeat quasi reiciendis sequi, tempora temporibus totam voluptatum.</string>
 </resources>

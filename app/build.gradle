@@ -97,5 +97,6 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     kaptAndroidTest 'com.google.dagger:hilt-compiler:2.36'
 
-
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
