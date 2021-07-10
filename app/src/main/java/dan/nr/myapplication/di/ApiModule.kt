@@ -6,7 +6,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dan.nr.myapplication.network.AuthApi
+import dan.nr.myapplication.network.RemoteDataSource
+import dan.nr.myapplication.network.TodoApi
 import dan.nr.myapplication.util.BASE_URL
+import dan.nr.myapplication.util.UserPreferences
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -48,5 +53,14 @@ object ApiModule
         return retrofit
                 .build()
                 .create(AuthApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTodoApi(userPreferences: UserPreferences,
+                       remoteDataSource: RemoteDataSource): TodoApi
+    {
+        val authToken: String? = runBlocking { userPreferences.authToken.first() }
+        return remoteDataSource.buildApi(TodoApi::class.java, authToken)
     }
 }

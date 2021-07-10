@@ -28,10 +28,6 @@ class AuthViewModel @Inject constructor(var repository: AuthRepository) : BaseVi
     private val _emailCheckResponse = MutableLiveData<Resource<AuthResponse>>()
     val emailCheckResponse: LiveData<Resource<AuthResponse>> = _emailCheckResponse
 
-    init
-    {
-        Log.i(TAG, "init: ")
-    }
     fun login(email: String, password: String)
     {
         viewModelScope.launch {
@@ -60,11 +56,5 @@ class AuthViewModel @Inject constructor(var repository: AuthRepository) : BaseVi
                       userPreferences: UserPreferences) = viewModelScope.launch {
         userPreferences.clear()
         userPreferences.saveAuthToken(authToken)
-    }
-
-    public override fun onCleared()
-    {
-        super.onCleared()
-        Log.i(TAG, "onCleared: ")
     }
 }

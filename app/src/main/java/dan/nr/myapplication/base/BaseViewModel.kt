@@ -1,14 +1,11 @@
 package dan.nr.myapplication.base
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dan.nr.myapplication.network.AuthApi
 import dan.nr.myapplication.network.RemoteDataSource
-import dan.nr.myapplication.util.TAG
 import dan.nr.myapplication.util.UserPreferences
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
