@@ -1,6 +1,5 @@
-package dan.nr.myapplication.network
+package dan.nr.myapplication.network.todo
 
-import dan.nr.myapplication.model.todo.TodoResponse
 import retrofit2.http.POST
 
 interface TodoApi

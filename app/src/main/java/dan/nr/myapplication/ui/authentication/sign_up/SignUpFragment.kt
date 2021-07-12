@@ -72,7 +72,6 @@ class SignupFragment : BaseFragment<FragmentSignUpBinding>()
     {
         lifecycleScope.launchWhenStarted {
             viewModel.signUpEventFlow.collect { response ->
-                Log.i(TAG, "subscribeObservers: $response")
                 when (response)
                 {
                     is Resource.Loading ->

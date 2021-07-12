@@ -3,8 +3,9 @@ package dan.nr.myapplication.repository
 import dan.nr.myapplication.base.BaseRepository
 import dan.nr.myapplication.network.AuthApi
 import dan.nr.myapplication.util.safeApiCall
+import javax.inject.Inject
 
-class AuthRepository(var api: AuthApi) : BaseRepository()
+class AuthRepository @Inject constructor(var api: AuthApi) : BaseRepository()
 {
     suspend fun login(email: String, password: String) = safeApiCall {
         api.login(email, password)

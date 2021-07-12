@@ -7,7 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dan.nr.myapplication.network.AuthApi
 import dan.nr.myapplication.network.RemoteDataSource
-import dan.nr.myapplication.network.TodoApi
+import dan.nr.myapplication.network.todo.TodoApi
 import dan.nr.myapplication.util.BASE_URL
 import dan.nr.myapplication.util.UserPreferences
 import kotlinx.coroutines.flow.first
@@ -48,11 +48,9 @@ object ApiModule
 
     @Singleton
     @Provides
-    fun provideAuthService(retrofit: Retrofit.Builder): AuthApi
+    fun provideAuthService(remoteDataSource: RemoteDataSource): AuthApi
     {
-        return retrofit
-                .build()
-                .create(AuthApi::class.java)
+        return remoteDataSource.buildApi(AuthApi::class.java)
     }
 
     @Singleton
